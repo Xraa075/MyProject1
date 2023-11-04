@@ -1,0 +1,934 @@
+<html>
+<head>
+ <meta name=viewport content="width=device-width, userscaleable=0">
+ <link rel=stylesheet type=text/css href="Files/Icon/feather.css">
+ <style>
+  * {
+   scroll-behavior: smooth
+  }
+
+@font-face {
+   font-family: 'Varela Round';
+   src: url(Files/Font/VarelaRoundRegular.ttf)
+  }
+
+  .dark {
+   background: #101010;
+   color: #f0f0f0
+  }
+
+  .dark #transpage {
+   background: #303030
+  }
+
+  .dark #bateraiIsi,.dark #beliitemIsi,.dark #betaIsi,.dark #energiKurang,.dark #infoIsi,.dark #infoPerangIsi,.dark #LevelupIsi,.dark #kalah,.dark #kembaliIsi,.dark #kuotaIsi,.dark #kurangIsi,.dark #menang,.dark #menuIsi,.dark #panduanIsi,.dark #tokoIsi,.dark #konfirmbeliIsi {
+   background: rgba(0,0,0,.6)
+  }
+
+  .dark #bateraiIsi1,.dark #beliitemIsi1,.dark #betaIsi1,.dark #energiKurang1,.dark #infoIsi1,.dark #infoPerangIsi1,.dark #LevelupIsi1,.dark #kalah1,.dark #kembaliIsi1,.dark #kuotaIsi1,.dark #kurangIsi1,.dark #menang1,.dark #menuIsi1,.dark #panduanIsi1,.dark #tokoIsi1,.dark #konfirmbeliIsi1 {
+   background: #151515
+  }
+
+  .dark #cheat {
+   border-bottom-color: #f0f0f0
+  }
+
+  .dark #cheat,.dark #tutupp,.dark #tutup,.dark #tutup5,.dark a {
+   color: #f0f0f0
+  }
+
+  .dark #tutup1,.dark #tutup3 {
+   background: #202020;
+   color: #f0f0f0
+  }
+
+  .dark #boxAi,.dark #infoPerangIsi2::-webkit-scrollbar-thumb,.dark #panduanIsi2::-webkit-scrollbar-thumb,.dark #tokoIsi2::-webkit-scrollbar-thumb,.dark #tutup2,.dark #tutup4 {
+   background: #2080f0;
+   color: #f0f0f0
+  }
+
+  .dark #simbol {
+   color: #2080f0
+  }
+
+  body {
+   font-family: 'Varela Round';
+   user-select: none;
+   background: #fafafa;
+   color: #101010;
+   margin: 0
+  }
+
+  #beranda,#lapangan {
+   width: 100%;
+   height: 100%;
+   overflow: hidden
+  }
+
+  #transpage {
+   width: 100%;
+   height: 100%;
+   background: #f0f0f0;
+   position: fixed;
+   bottom: -100%
+  }
+
+@keyframes transisi {
+   30%,70% {
+    bottom: 0
+   }}
+
+  #menu {
+   font-size: 32px;
+   color: #0296f5;
+   position: fixed;
+   top: 25px;
+   right: 10px;
+   animation: fade;
+   animation-duration: 1.5s
+  }
+
+  #bateraiIsi,#beliitemIsi,#betaIsi,#energiKurang,#infoIsi,#infoPerangIsi,#LevelupIsi,#kalah,#kembaliIsi,#kuotaIsi,#kurangIsi,#menang,#menuIsi,#panduanIsi,#tokoIsi,#konfirmbeliIsi {
+   display: none;
+   Z-index: 1;
+   height: 100%;
+   width: 100%;
+   background: rgba(0,0,0,.3);
+   position: fixed;
+   top: 0
+  }
+
+  #bateraiIsi1,#beliitemIsi1,#betaIsi1,#energiKurang1,#infoIsi1,#infoPerangIsi1,#LevelupIsi1,#kalah1,#kembaliIsi1,#kuotaIsi1,#kurangIsi1,#menang1,#menuIsi1,#panduanIsi1,#tokoIsi1,#konfirmbeliIsi1 {
+   width: 100%;
+   background: #fafafa;
+   border-radius: 20px 20px 0 0;
+   position: fixed;
+   bottom: 0;
+   animation: popup.3s ease-out
+  }
+
+@keyframes popup {
+   0% {
+    transform: translateY(100%)
+   }}
+
+@keyframes fade {
+   0%,40% {
+    opacity: 0
+   }
+   80% {
+    opacity: 0.8
+   }}
+
+  .mjs-bounce {
+   animation-name: action-bounce
+  }
+
+@keyframes action-bounce {
+   0%,100% {
+    transform: translate(0,0)
+   }
+   10%,90% {
+    transform: translate(0,8px)
+   }
+   50% {
+    transform: translate(0,-15px)
+   }}
+
+  #panduanIsi2 {
+   height: 250px;
+   overflow-y: scroll
+  }
+
+  #infoPerangIsi2::-webkit-scrollbar,#panduanIsi2::-webkit-scrollbar {
+   width: 5px
+  }
+
+  #cheat {
+   background: 0 0;
+   border: none;
+   outline: 0;
+   border-bottom: 1px solid #101010
+  }
+
+  #judulMenu {
+   font-size: 24px;
+   margin: 30px
+  }
+
+  #judulBeranda {
+   width: 230px;
+   height: 110px;
+   filter: drop-shadow(0 15px 30px rgba(0,0,0,.28));
+   animation: fade;
+   animation-duration: 1s
+  }
+
+  #box {
+   transform: translate(-50%,-50%);
+   position: absolute;
+   top: 50%;
+   left: 50%
+  }
+
+  #tombolMulai {
+   display: inline-block;
+   color: #0296f5;
+   font-size: 80px;
+   transition: .1s;
+   animation: fade;
+   animation-duration: 2s
+  }
+
+  #copyright,#versi {
+   font-size: 20px
+  }
+
+  #versi {
+   margin-top: 150px
+  }
+
+  #tutupp,#tutup1,#tutup2,#tutup3,#tutup4,#tutup5 {
+   height: 45px;
+   width: 90%;
+   background: #f0f0f0;
+   font-family: 'Varela Round';
+   font-size: 18px;
+   outline: 0;
+   border: none;
+   border-radius: 50px
+  }
+
+  #tutupp {
+   height: 42px;
+   background: 0 0;
+   text-align: left;
+   margin-bottom: 10px
+  }
+
+  #tutup {
+   width: 90%;
+   background: 0 0;
+   font-family: 'Varela Round';
+   text-align: left;
+   font-size: 18px;
+   outline: 0;
+   border: none;
+   border-radius: 50px;
+   margin-bottom: 10px
+  }
+
+  #tutup1,#tutup2,#tutup3,#tutup4 {
+   margin: 10px 0 20px
+  }
+
+  #tutup2,#tutup4 {
+   background: #0296f5;
+   color: #fafafa
+  }
+
+  #tutup3,#tutup4,#tutup5 {
+   width: 45%
+  }
+
+  #tutup5 {
+   background: 0 0;
+   font-size: 20px
+  }
+
+  a {
+   color: #101010;
+   -webkit-tap-highlight-color: transparent;
+   text-decoration: none
+  }
+
+  #simbol {
+   display: inline-block;
+   color: #0296f5;
+   font-size: 70px;
+   margin: 20px
+  }
+
+  #permainan {
+   display: none
+  }
+
+  #musuh {
+   position: fixed;
+   top: 0;
+   right: -5%
+  }
+
+  #kita {
+   position: fixed;
+   bottom: -20px;
+   left: -85px
+  }
+
+  #infoPerangIsi2 {
+   width: 100%;
+   height: 25em;
+   overflow-y: scroll
+  }
+
+  #tokoIsi2 {
+   width: 100%;
+   display: flex;
+   flex-wrap: nowrap;
+   overflow-x: auto
+  }
+
+  #tokoIsi2::-webkit-scrollbar {
+   height: 5px
+  }
+
+  #infoPerangIsi2::-webkit-scrollbar-thumb,#panduanIsi2::-webkit-scrollbar-thumb,#tokoIsi2::-webkit-scrollbar-thumb {
+   background: #0296f5;
+   border-radius: 50px
+  }
+
+  #boxAi {
+   display: flex;
+   justify-content: space-evenly;
+   height: 40px;
+   width: 40%;
+   background: #0296f5;
+   color: #fafafa;
+   border-radius: 50px;
+   position: fixed;
+   bottom: 20px;
+   right: 20px
+  }
+
+  #home,#infoPerang,#toko {
+   font-size: 24px;
+   margin: auto
+  }
+
+  #atk1,#atk2,#barang1,#barang2,#cst1,#dfs1,#dfs2,#enr1,#hp1,#hp2,#lvl1,#lvl2,#rgn1,#rgn2 {
+   font-size: 20px;
+   margin-left: 30px
+  }
+ </style>
+</head>
+<body>
+ <div id=bateraiIsi>
+  <div id=bateraiIsi1>
+   <center>
+    <i class=feather-battery-charging id=simbol></i>
+    <p id=copyright>
+     Baterai kamu kurang dari 20%
+    </p>
+    <button id=tutup1 onclick=bateraiIsihide()>Ok</button>
+   </center>
+  </div>
+ </div>
+ <div id=transpage></div>
+ <div id=beranda>
+  <center>
+   <i class=feather-more-vertical id=menu onclick=menuIsishow()></i>
+   <img id=judulBeranda src=Files/Foto/Judul.gif>
+   <br>
+   <div id=box>
+    <i class=feather-play-circle id=tombolMulai onclick=tanpabatas()></i>
+   </div>
+  </center>
+ </div>
+ <div id=menuIsi>
+  <div id=menuIsi1>
+   <center>
+    <h1 id=judulMenu>Menu</h1>
+    <button id=tutupp onclick=infoIsishow()>Info Aplikasi</button>
+    <button id=tutupp onclick=panduanIsishow()>Panduan</button>
+    <button id=tutupp onclick=location.reload()>Muat ulang</button>
+    <button id=tutup1 onclick=menuIsihide()>Tutup</button>
+   </center>
+  </div>
+ </div>
+ <div id=infoIsi>
+  <div id=infoIsi1>
+   <center>
+    <img src=Files/Foto/icon1.png id=simbol width=180px height=180px ondblclick=betaIsishow() data-micron=bounce>
+    <p id=copyright>
+     ZA Developer
+    </p>
+    <p id=versi>
+     Dear user
+     <br> Terimakasih sudah menggunakan aplikasi kami
+     <br>
+     <br> v0.1.2
+    </p>
+    <button id=tutup1 onclick=infoIsihide()>Tutup</button>
+   </center>
+  </div>
+ </div>
+ <div id=panduanIsi>
+  <div id=panduanIsi1>
+   <center>
+    <h1 id=judulMenu>Panduan</h1>
+    <div id=panduanIsi2>
+     <button id=tutup>1. Ketuk musuh untuk menyerang. Gunakan dua jari untuk mempercepat serangan</button>
+     <button id=tutup>2. Setiap serangan akan mengurangi energi</button>
+     <button id=tutup>3. Berhenti sesaat untuk memulihkan energi</button>
+     <button id=tutup>4. Kamu bisa membeli item di toko untuk memperkuat dirimu. Ketuk 2 kali pada item untuk membelinya</button>
+     <button id=tutup>5. Setiap item mempunyai kelebihan tersendiri</button>
+     <button id=tutup>6. Batasan jumlah pembelian berlaku. Kamu hanya dapat membeli sebanyak 3 item</button>
+     <button id=tutup>7. Kamu tidak bisa menjual Item yang sudah dibeli.</button>
+     <button id=tutup>8. InfoPerang berisi statistik kekuatan kamu dan kekuatan musuh. Geser untuk membandingkan</button>
+     <button id=tutup>9. Kamu bisa memindahkan Tombol Mulai yang ada di beranda sesukamu</button>
+     <button id=tutup>10. Ketuk 2 kali pada Icon Dev untuk opsi pengembang</button>
+     <button id=tutup>Selamat bermain🙂</button>
+    </div>
+    <button id=tutup1 onclick=panduanIsihide()>Tutup</button>
+   </center>
+  </div>
+ </div>
+ <div id=betaIsi>
+  <div id=betaIsi1>
+   <center>
+    <h1 id=judulMenu>Selamat datang!</h1>
+    <input type=password id=cheat placeholder=Code>
+    <button id=tutup1 onclick=betaIsihide()>Simpan</button>
+   </center>
+  </div>
+ </div>
+ <div id=permainan>
+  <img id=musuh src=Files/Foto/Musuh.png width=220px height=220px onclick=serang() data-micron=bounce> <img id=kita src=Files/Foto/Kita.png width=320px height=280px data-micron=bounce>
+  <div id=boxAi>
+   <i class=feather-info id=infoPerang onclick=infoPerangIsishow()></i> <i class=feather-shopping-bag id=toko onclick=tokoIsishow()></i><i class=feather-home id=home onclick=kembaliIsishow()></i>
+  </div>
+  <canvas id=lapangan></canvas>
+ </div>
+ <div id=infoPerangIsi>
+  <div id=infoPerangIsi1>
+   <center>
+    <h1 id=judulMenu>Info Perang</h1>
+    <div id=switch>
+     <button id=tutup5> <a href=#infoKita>Kamu</a> </button>
+     <button id=tutup5> <a href=#infoMusuh>King Orc</a> </button>
+    </div>
+   </center>
+   <div id=infoPerangIsi2>
+    <div id=infoKita>
+     <img src=Files/Foto/Kita.png width=200px height=150px data-micron=bounce><p id=lvl1></p>
+     <p id=atk1></p>
+     <p id=hp1></p>
+     <p id=enr1></p>
+     <p id=rgn1></p>
+     <p id=dfs1></p>
+     <p id=cst1></p>
+     <p id=barang1></p>
+     <p id=barang2></p>
+     <center>
+      <button id=tutup2 onclick=naikLevel()>Tingkatkan <i class=feather-arrow-up></i></button>
+     </center>
+    </div>
+    <div id=infoMusuh>
+     <img src=Files/Foto/Musuh.png width=150px height=150px data-micron=bounce>
+     <p id=lvl2></p>
+     <p id=atk2></p>
+     <p id=hp2></p>
+     <p id=rgn2></p>
+     <p id=dfs2></p>
+    </div>
+   </div>
+   <center>
+    <button id=tutup1 onclick=infoPerangIsihide()>Tutup</button>
+   </center>
+  </div>
+ </div>
+ <div id=tokoIsi>
+  <div id=tokoIsi1>
+   <center>
+    <h1 id=judulMenu>Toko</h1>
+    <div id=tokoIsi2>
+     <img src=Files/Foto/1.1.png width=100px height=100px ondblclick="nilai=2">
+     <img src=Files/Foto/2.2.png width=100px height=100px ondblclick="nilai=3">
+     <img src=Files/Foto/3.3.png width=100px height=100px ondblclick="nilai=4">
+     <img src=Files/Foto/4.1.png width=100px height=100px ondblclick="nilai=5">
+     <img src=Files/Foto/5.2.png width=100px height=100px ondblclick="nilai=6">
+     <img src=Files/Foto/6.3.png width=100px height=100px ondblclick="nilai=7">
+     <img src=Files/Foto/7.1.png width=100px height=100px ondblclick="nilai=8">
+     <img src=Files/Foto/8.2.png width=100px height=100px ondblclick="nilai=9">
+     <img src=Files/Foto/9.1.png width=100px height=100px ondblclick="nilai=10">
+     <img src=Files/Foto/10.2.png width=100px height=100px ondblclick="nilai=11">
+    </div>
+    <button id=tutup1 onclick=tokoIsihide()>Tutup</button>
+   </center>
+  </div>
+ </div>
+ <div id=LevelupIsi>
+  <div id=LevelupIsi1>
+   <center>
+    <i class=feather-check-circle id=simbol></i>
+    <p id=copyright>
+     Level Up
+    </p>
+    <button id=tutup1 onclick=LevelupIsihide()>Ok</button>
+   </center>
+  </div>
+ </div>
+ <div id=kembaliIsi>
+  <div id=kembaliIsi1>
+   <center>
+    <i class=feather-alert-octagon id=simbol></i>
+    <p id=copyright>
+     Kamu yakin ingin kembali ke beranda?
+    </p>
+    <button id=tutup3 onclick=kembaliIsihide()>Batal</button>
+    <button id=tutup4 onclick=location.reload()>Ya</button>
+   </center>
+  </div>
+ </div>
+ <div id=beliitemIsi>
+  <div id=beliitemIsi1>
+   <center>
+    <i class=feather-help-circle id=simbol></i>
+    <p id=copyright>
+     Kamu yakin ingin membeli item ini?
+    </p>
+    <button id=tutup3 onclick="nilai = 0">Batal</button>
+    <button id=tutup4 onclick=shop()>Ya</button>
+   </center>
+  </div>
+ </div>
+ <div id=konfirmbeliIsi>
+  <div id=konfirmbeliIsi1>
+   <center>
+    <i class=feather-check-circle id=simbol></i>
+    <p id=copyright>
+     Item berhasil dibeli
+    </p>
+    <button id=tutup1 onclick=konfirmbeliIsihide()>Ok</button>
+   </center>
+  </div>
+ </div>
+ <div id=kuotaIsi>
+  <div id=kuotaIsi1>
+   <center>
+    <i class=feather-alert-octagon id=simbol></i>
+    <p id=copyright>
+     Kuota pembelian sudah habis!
+    </p>
+    <button id=tutup1 onclick=kuotaIsihide()>Ok</button>
+   </center>
+  </div>
+ </div>
+ <div id=kurangIsi>
+  <div id=kurangIsi1>
+   <center>
+    <i class=feather-alert-octagon id=simbol></i>
+    <p id=copyright>
+     Maaf...Koin anda tidak cukup!
+    </p>
+    <button id=tutup1 onclick=kurangIsihide()>Ok</button>
+   </center>
+  </div>
+ </div>
+ <div id=energiKurang>
+  <div id=energiKurang1>
+   <center>
+    <i class=feather-alert-octagon id=simbol></i>
+    <p id=copyright>
+     Energi tidak mencukupi. Tunggu beberapa saat untuk pemulihan!
+    </p>
+    <button id=tutup1 onclick=energiKuranghide()>Ok</button>
+   </center>
+  </div>
+ </div>
+ <div id=menang>
+  <div id=menang1>
+   <center>
+    <i class=feather-check-circle id=simbol></i>
+    <h1 id=copyright>1 Level Terselesaikan</h1>
+    <p id=copyright>
+     Hadiah: koin +20
+    </p>
+    <button id=tutup1 onclick=lanjut()>Ok</button>
+   </center>
+  </div>
+ </div>
+ <div id=kalah>
+  <div id=kalah1>
+   <center>
+    <i class=feather-thumbs-down id=simbol></i>
+    <p id=copyright>
+     Kamu kalah
+    </p>
+    <button id=tutup1 onclick=location.reload()>Ok</button>
+   </center>
+  </div>
+ </div>
+
+ <script>
+  var watchEvents = function() {
+   window.addEventListener("click", function(n) {
+    var a = n.target,
+    e = "mjs-",
+    i = a.dataset.micron,
+    t = a.dataset.micronDuration,
+    s = a.dataset.micronTiming,
+    l = a.dataset.micronBind,
+    o = a.dataset.micronId;
+    if (void 0 === i) return !1;
+    if ("true" === l) {
+     if (void 0 === o) return !1;
+     if (void 0 === (r = document.getElementById(o)) || null === r) return !1;
+     var u = r;
+     r.parentNode.replaceChild(u, r),
+     u.classList.add(e + i)
+    } else {
+     var r;
+     u = r = a,
+     r.parentNode.replaceChild(u, r),
+     u.classList.add(e + i)
+    }
+    void 0 !== t ? isNaN(t) ? u.style.animationDuration = ".45s": u.style.animationDuration = t + "s": u.style.animationDuration = ".45s",
+    void 0 === s || "linear" !== s && "ease-in" !== s && "ease-out" !== s && "ease-in-out" !== s ? u.classList.add(e + "ease-in-out"): u.classList.add(e + s)
+   })
+  };
+  "loading" != document.readyState ? watchEvents(): document.addEventListener("DOMContentLoaded", function() {
+   watchEvents()
+  });
+  var Micron = function() {
+   var n, a;
+   return {
+    getEle: function(e) {
+     return null != (n = document.querySelector(e)) && null != n ? (a = n,
+      n.parentNode.replaceChild(a, n),
+      this): this
+    },
+    interaction: function(n) {
+     if (null != a) {
+      if (null != n && null != n && -1 == n.indexOf(" ")) {
+       var e = "mjs-" + n;
+       return a.classList.add(e),
+       this
+      }
+      return this
+     }
+     return this
+    },
+    duration: function(n) {
+     return null != a && null != a && 0 == isNaN(n) ? (a.style.animationDuration = n + "s", this): this
+    },
+    timing: function(n) {
+     if (null != a && null != a) {
+      if ("linear" == n || "ease-in" == n || "ease-out" == n || "ease-in-out" == n) {
+       var e = "mjs-" + n;
+       return a.classList.add(e),
+       this
+      }
+      return this
+     }
+     return this
+    }
+   }
+  },
+  micron = Micron();
+  "object" == typeof module && module.exports && (module.exports = micron);
+  lapangan.width = window.innerWidth,
+  lapangan.height = window.innerHeight;
+  var akhirX, akhirY, awalX, awalY, jam = (new Date).getHours(),
+  kerusakanMusuh = 10,
+  kerusakanTMusuh = 0,
+  kerusakan = 2,
+  kerusakanT = 0,
+  DefenseKita = 0,
+  DefenseMusuh = 0,
+  Hemat = 0,
+  beta = cheat.value,
+  musuhRegen = .1,
+  energiRegen = .05,
+  kalori = 1,
+  koin = 20,
+  cost = 15,
+  batas = 3,
+  levelMusuh = 1,
+  levelKita = 1,
+  waktu = 0,
+  nilai = 0,
+  active = !1,
+  xtengah = 0,
+  ytengah = 0,
+  nyawaKita = {
+   x: lapangan.width / 2,
+   y: lapangan.height / 3 * 2 + 110,
+   width: 150,
+   height: 12,
+   color: "red"
+  },
+  energiRegenbar = {
+   x: lapangan.width / 2,
+   y: lapangan.height / 3 * 2 + 122,
+   width: 150,
+   height: 15,
+   color: "orange"
+  },
+  nyawaMusuh = {
+   x: 0,
+   y: 120,
+   width: 150,
+   height: 15,
+   color: "red"
+  };
+  const ctx = lapangan.getContext("2d");
+
+  function bateraiIsishow() {
+   bateraiIsi.style.display = "block"
+  }
+
+  function bateraiIsihide() {
+   bateraiIsi.style.display = "none"
+  }
+
+  function menuIsishow() {
+   menuIsi.style.display = "block"
+  }
+
+  function menuIsihide() {
+   menuIsi.style.display = "none"
+  }
+
+  function infoIsishow() {
+   infoIsi.style.display = "block",
+   menuIsihide()
+  }
+
+  function infoIsihide() {
+   infoIsi.style.display = "none",
+   menuIsishow()
+  }
+
+  function panduanIsishow() {
+   panduanIsi.style.display = "block",
+   menuIsihide()
+  }
+
+  function panduanIsihide() {
+   panduanIsi.style.display = "none",
+   menuIsishow()
+  }
+
+  function betaIsishow() {
+   betaIsi.style.display = "block",
+   infoIsi.style.display = "none"
+  }
+
+  function betaIsihide() {
+   betaIsi.style.display = "none",
+   infoIsi.style.display = "block"
+  }
+
+  function tanpabatas() {
+   transpage.style.animation = "transisi 2s",
+   beranda.style.display = "none",
+   setTimeout(function() {
+    permainan.style.display = "block", update()
+   }, 2e3)
+  }
+
+  function serang() {
+   energiRegenbar.width > kalori ? (nyawaMusuh.width -= kerusakan + kerusakanT - DefenseMusuh, energiRegenbar.width -= kalori - Hemat): energiKurangshow()
+  }
+
+  function infoPerangIsishow() {
+   infoPerangIsi.style.display = "block"
+  }
+
+  function infoPerangIsihide() {
+   infoPerangIsi.style.display = "none"
+  }
+
+  function tokoIsishow() {
+   tokoIsi.style.display = "block"
+  }
+
+  function tokoIsihide() {
+   tokoIsi.style.display = "none"
+  }
+
+  function beliitemIsishow() {
+   beliitemIsi.style.display = "block",
+   tokoIsihide()
+  }
+
+  function beliitemIsihide() {
+   beliitemIsi.style.display = "none"
+  }
+
+  function shop() {
+   "Dev" === cheat.value ?
+   (2 === nilai && (kerusakanT += 2, beliitemIsishow(), konfirmbeliIsishow()),
+    3 === nilai && (kerusakanT += 4, DefenseKita += 1, beliitemIsishow(), konfirmbeliIsishow()),
+    4 === nilai && (kerusakanT += 2, Hemat += 2, beliitemIsishow(), konfirmbeliIsishow()),
+    5 === nilai && (kerusakanT += 4, beliitemIsishow(), konfirmbeliIsishow()),
+    6 === nilai && (kerusakanT += 3, DefenseKita += 3, beliitemIsishow(), konfirmbeliIsishow()),
+    7 === nilai && (kerusakanT += 5, Hemat += 5, beliitemIsishow(), konfirmbeliIsishow()),
+    8 === nilai && (Hemat += 3, beliitemIsishow(), konfirmbeliIsishow()),
+    9 === nilai && (Hemat += 5, beliitemIsishow(), konfirmbeliIsishow()),
+    10 === nilai && (DefenseKita += 3, beliitemIsishow(), konfirmbeliIsishow()),
+    11 === nilai && (DefenseKita += 5, beliitemIsishow(), konfirmbeliIsishow())):
+   batas > 0 ?
+   (2 === nilai && (koin >= 20 ? (kerusakanT += 2, koin -= 20, batas -= 1, beliitemIsishow(), konfirmbeliIsishow()): kurangIsishow()),
+    3 === nilai && (koin >= 30 ? (kerusakanT += 4, DefenseKita += 1, koin -= 30, batas -= 1, beliitemIsishow(), konfirmbeliIsishow()): kurangIsishow()),
+    4 === nilai && (koin >= 25 ? (kerusakanT += 2, Hemat += 2, koin -= 25, batas -= 1, beliitemIsishow(), konfirmbeliIsishow()): kurangIsishow()),
+    5 === nilai && (koin >= 22 ? (kerusakanT += 4, koin -= 22, batas -= 1, beliitemIsishow(), konfirmbeliIsishow()): kurangIsishow()),
+    6 === nilai && (koin >= 40 ? (kerusakanT += 3, DefenseKita += 3, koin -= 40, batas -= 1, beliitemIsishow(), konfirmbeliIsishow()): kurangIsishow()),
+    7 === nilai && (koin >= 55 ? (kerusakanT += 5, Hemat += 5, koin -= 55, batas -= 1, beliitemIsishow(), konfirmbeliIsishow()): kurangIsishow()),
+    8 === nilai && (koin >= 15 ? (Hemat += 3, koin -= 15, batas -= 1, beliitemIsishow(), konfirmbeliIsishow()): kurangIsishow()),
+    9 === nilai && (koin >= 25 ? (Hemat += 5, koin -= 25, batas -= 1, beliitemIsishow(), konfirmbeliIsishow()): kurangIsishow()),
+    10 === nilai && (koin >= 20 ? (DefenseKita += 3, koin -= 20, batas -= 1, beliitemIsishow(), konfirmbeliIsishow()): kurangIsishow()),
+    11 === nilai && (koin >= 22 ? (DefenseKita += 5, koin -= 22, batas -= 1, beliitemIsishow(), konfirmbeliIsishow()): kurangIsishow())):
+   kuotaIsishow()
+  }
+
+  function konfirmbeliIsishow() {
+   konfirmbeliIsi.style.display = "block",
+   nilai = 0
+  }
+
+  function konfirmbeliIsihide() {
+   konfirmbeliIsi.style.display = "none",
+   tokoIsishow()
+  }
+
+  function kuotaIsishow() {
+   kuotaIsi.style.display = "block",
+   nilai = 0
+  }
+
+  function kuotaIsihide() {
+   kuotaIsi.style.display = "none",
+   tokoIsishow()
+  }
+
+  function kembaliIsishow() {
+   kembaliIsi.style.display = "block"
+  }
+
+  function kembaliIsihide() {
+   kembaliIsi.style.display = "none"
+  }
+
+  function kurangIsishow() {
+   kurangIsi.style.display = "block",
+   nilai = 0
+  }
+
+  function kurangIsihide() {
+   kurangIsi.style.display = "none"
+  }
+
+  function energiKurangshow() {
+   energiKurang.style.display = "block"
+  }
+
+  function energiKuranghide() {
+   energiKurang.style.display = "none"
+  }
+
+  function menangShow() {
+   menang.style.display = "block"
+  }
+
+  function menangHide() {
+   menang.style.display = "none"
+  }
+
+  function kalahShow() {
+   kalah.style.display = "block"
+  }
+
+  function lanjut() {
+   menangHide(),
+   koin += 20,
+   levelMusuh += 1,
+   kerusakanMusuh += .5,
+   nyawaMusuh.width = 150,
+   musuhRegen += .05,
+   nyawaKita.width <= 150 && (nyawaKita.width = 150)
+  }
+
+  function naikLevel() {
+   "Dev" == cheat.value ? (levelKita += 1, kerusakan += 1, energiRegen += .05, kalori += .5, nyawaKita.width <= 150 && (nyawaKita.width = 150), LevelupIsishow()): koin >= cost ? (koin -= cost, cost += 5, levelKita += 1, kerusakan += 1, energiRegen += .05, kalori += .5, nyawaKita.width <= 150 && (nyawaKita.width = 150), LevelupIsishow()): kurangIsishow()
+  }
+
+  function LevelupIsishow() {
+   LevelupIsi.style.display = "block"
+  }
+
+  function LevelupIsihide() {
+   LevelupIsi.style.display = "none"
+  }
+
+  function drawRect(n, a, e, i, t) {
+   ctx.fillStyle = t,
+   ctx.fillRect(n, a, e, i)
+  }
+
+  function drawText(n, a, e, i, t) {
+   ctx.fillStyle = '#0296f5',
+   ctx.fillText(n, a, e),
+   ctx.font = "25px Varela Round"
+  }
+
+  function update() {
+   ctx.clearRect(0, 0, lapangan.width, lapangan.height),
+   drawText("Orc Level " + levelMusuh, 0, 110),
+   drawText("Kamu Level " + levelKita, lapangan.width / 2, lapangan.height / 3 * 2 + 100),
+   drawRect(nyawaKita.x, nyawaKita.y, nyawaKita.width, nyawaKita.height, nyawaKita.color),
+   drawRect(nyawaMusuh.x, nyawaMusuh.y, nyawaMusuh.width, nyawaMusuh.height, nyawaMusuh.color),
+   drawRect(energiRegenbar.x, energiRegenbar.y, energiRegenbar.width, energiRegenbar.height, energiRegenbar.color),
+   waktu++,
+   nyawaMusuh.width <= 150 && nyawaMusuh.width > 0 && (nyawaMusuh.width += musuhRegen),
+   energiRegenbar.width <= 150 && (energiRegenbar.width += energiRegen),
+   500 === waktu && (nyawaKita.width -= kerusakanMusuh + kerusakanTMusuh - DefenseKita, waktu = 0),
+   nyawaMusuh.width <= 0 ? (menangShow(), waktu = 0): nyawaKita.width <= 0 && (kalahShow(), waktu = 0),
+   nilai > 1 ? beliitemIsishow(): beliitemIsihide(),
+   document.getElementById("lvl1").innerHTML = "Level: " + levelKita + " (+1)",
+   document.getElementById("atk1").innerHTML = "Kerusakan: " + (kerusakan + kerusakanT) + " / tap (+1)",
+   document.getElementById("hp1").innerHTML = "Nyawa: " + nyawaKita.width,
+   document.getElementById("enr1").innerHTML = "Energi: " + energiRegenbar.width,
+   document.getElementById("rgn1").innerHTML = "Pemulihan energi: " + energiRegen + " / 0.1s (+0.05)",
+   document.getElementById("dfs1").innerHTML = "Kebal: " + DefenseKita + " Serangan",
+   document.getElementById("cst1").innerHTML = "Hemat Energi: " + Hemat,
+   document.getElementById("barang1").innerHTML = "Koin dimiliki: " + koin,
+   document.getElementById("barang2").innerHTML = "Biaya Peningkatan: " + cost + "koin",
+   document.getElementById("lvl2").innerHTML = "Level: " + levelMusuh,
+   document.getElementById("atk2").innerHTML = "kerusakan: " + kerusakanMusuh + " / 10s",
+   document.getElementById("hp2").innerHTML = "Nyawa: " + nyawaMusuh.width,
+   document.getElementById("rgn2").innerHTML = "Pemulihan nyawa: " + musuhRegen + " / 0.1s",
+   document.getElementById("dfs2").innerHTML = "Kebal: " + DefenseMusuh + " Serangan",
+   requestAnimationFrame(update)
+  }
+
+  function start(n) {
+   "touchstart" === n.type ? (awalX = n.touches[0].clientX - xtengah, awalY = n.touches[0].clientY - ytengah): (awalX = n.clientX - xtengah, awalY = n.clientY - ytengah),
+   active = !0
+  }
+
+  function move(n) {
+   active && ("touchmove" === n.type ? (akhirX = n.touches[0].clientX - awalX, akhirY = n.touches[0].clientY - awalY): (akhirX = n.clientX - awalX, akhirY = n.clientY - awalY)),
+   xtengah = akhirX,
+   ytengah = akhirY,
+   pindah(akhirX, akhirY, tombolMulai)
+  }
+
+  function pindah(n, a, e) {
+   e.style.transform = "translate3d(" + n + "px, " + a + "px, 0)"
+  }
+
+  function end(n) {
+   active = !1
+  }
+  5 >= jam || jam >= 18 ? document.body.classList.add("dark"): document.body.classList.remove("dark"),
+  navigator.getBattery().then(function(n) {
+   n.level < .2 && bateraiIsishow()
+  }),
+  tombolMulai.addEventListener("touchstart", start, !1),
+  tombolMulai.addEventListener("touchmove", move, !1),
+  tombolMulai.addEventListener("touchend", end, !1);
+ </script>
+</body>
+</html>
